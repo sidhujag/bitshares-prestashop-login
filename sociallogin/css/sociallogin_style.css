@@ -1,0 +1,234 @@
+/* CSS Document */
+
+#loginradius_first_block {
+    display: block;
+    border: 1px solid grey;
+    background-color: #EAF7FF;
+}
+
+.spantxt {
+    float: left;
+    width: 105px;
+    text-align: left;
+    margin-top: 8px;
+}
+
+.LoginRadius_overlay {
+    background: none no-repeat scroll 0 0 rgba(127, 127, 127, 0.6);
+    height: 100%;
+    left: 0;
+    overflow: auto;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100001;
+}
+
+#popupouter {
+    border-radius: 0 23px;
+    background: #f3f3f3;
+    left: 50%;
+    margin-left: -250px;
+    padding: 1px 0;
+    position: absolute;
+    top: 5%;
+    width: 500px;
+    z-index: 9999;
+}
+#popupouter.verify{
+    top: 36%;
+}
+#popupouter select:focus, #popupouter input[type="email"]:focus, #popupouter input[type="text"]:focus, #popupouter input[type="submit"]:focus, #popupouter input[type="button"]:focus {
+    border-radius: 0px 12px;
+    outline: none !important;
+}
+
+#popupouter input:-webkit-autofill, #popupouter textarea:-webkit-autofill, #popupouter select:-webkit-autofill {
+    background: #fff;
+
+}
+
+#popupinner select {
+    border-radius: 0 0 0 12px !important;
+}
+
+#popupinner {
+    background: #ffffff;
+    padding: 15px 30px;
+
+}
+
+.footerbox {
+    padding-bottom: 12px;
+    float: left;
+    padding-top: 12px;
+    padding-left: 20px;
+}
+
+#textmatter {
+    line-height: 20px;
+    padding: 15px;
+    text-align: center;
+}
+
+.inputtxt {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    border: #e5e5e5 1px solid;
+    width: 314px;
+    height: 35px;
+    margin: 2px 0px 15px 0px;
+    padding: 7px 7px 7px 10px;
+    color: #666666;
+    border-radius: 0px 12px;
+
+}
+
+.inputbutton {
+    border: #dcdcdc 1px solid;
+    text-decoration: none;
+    color: #6e6e6e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    background: #f3f3f3;
+    padding: 7px 12px;
+    margin: 0px 8px 0px 0px;
+    border-radius: 0px 11px !important;
+}
+
+.inputbutton:hover {
+    border: #00ccff 1px solid;
+    text-decoration: none;
+    color: #000000;
+    cursor: pointer;
+    background: #f3f3f3;
+}
+
+#textdivpopup {
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #000000;
+}
+
+.spanpopup {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #00ccff;
+}
+
+.span1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+}
+
+.LoginRadius_container_outer {
+    width: 648px;
+    border: 1px solid #ccc;
+    background-color: #EAF7FF;
+
+}
+
+.LoginRadius_container_inner {
+    background-color: #EAF7FF;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+}
+
+.LoginRadius_container {
+    float: left;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    width: 480px;
+    background-color: #EAF7FF;
+}
+
+.LoginRadius_container_outer h3 {
+    color: #00ccff;
+    font-size: 1.1em;
+}
+
+.LoginRadius_container_outer ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.LoginRadius_container_outer .LoginRadius_container_links {
+    border-color: #E6DB55;
+}
+
+.LoginRadius_container_outer .LoginRadius_container_links a {
+    color: #111;
+    text-decoration: none;
+}
+
+.LoginRadius_container_outer .LoginRadius_container_links a:hover {
+    color: #00ccff;
+}
+
+.LoginRadius_table {
+    background-color: #efefef;
+    border: 1px solid #ccc;
+    width: 650px;
+    margin-bottom: 10px;
+}
+
+.LoginRadius_table input {
+    border-color: #aaa;
+}
+
+.LoginRadius_table .head {
+    font-weight: bold;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #ddd;
+
+}
+
+.LoginRadius_table tr td.row {
+    line-height: 36px;
+}
+
+.LoginRadius_table tr.description td {
+    color: #0D5995;
+}
+
+.LoginRadius_table .row_white {
+    background-color: #fff;
+}
+
+@media (max-width: 769px) {
+    #popupouter {
+        background: none repeat scroll 0 0 #f3f3f3;
+        border-radius: 4px;
+        left: 0;
+        margin: 5% auto 0;
+        overflow: auto;
+        padding: 0;
+        position: static;
+        top: 0;
+        width: 400px;
+        border-radius: 0 23px;
+    }
+
+    .inputtxt {
+        width: 318px;
+    }
+}
+
+@media (max-width: 480px) {
+    #popupouter {
+        width: 300px;
+        border-radius: 0 23px;
+    }
+
+    .inputtxt {
+        width: 220px;
+    }
+}

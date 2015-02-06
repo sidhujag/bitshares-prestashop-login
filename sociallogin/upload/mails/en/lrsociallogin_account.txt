@@ -1,0 +1,27 @@
+﻿
+[{shop_url}] 
+
+Hi {name},
+ [{shop_name}]
+
+{subject}. 
+
+{message} 		 
+
+Important Security Tips:
+
+* Always keep your account details safe.
+
+* Never disclose your login details to anyone.
+
+* Change your password regularly.
+
+* Should you suspect someone is using your account illegally, please
+notify us immediately.
+
+You can now place orders on our shop: {shop_name}
+[{shop_url}] 
+
+{shop_name} [{shop_url}] powered by
+PrestaShop(tm) [http://www.prestashop.com/] 
+

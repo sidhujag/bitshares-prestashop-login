@@ -1,0 +1,411 @@
+.lr_apis {
+    float: left;
+    width: 75px !important;
+}
+
+div#sharehorizontal label img {
+    vertical-align: middle;
+}
+
+#sharehorizontal label {
+    margin: 12px 10px 0 0;
+    float: left;
+    text-align: left;
+}
+
+div#sharehorizontal input {
+    margin-right: 6px;
+}
+
+#hybrid-horizontal-horizontal {
+    margin-right: 9px !important;
+}
+
+#sharevertical label {
+    width: auto !important;
+}
+
+.row_white.shareprovider > td {
+    float: left;
+    width: 154px;
+    margin-bottom: 0px !important;
+    padding: 4px 17px 2px 4px !important;
+}
+
+.row_white.verticalshareprovider > td {
+    float: left;
+    width: 154px;
+    margin-bottom: 0px !important;
+    padding: 4px 17px 2px 4px !important;
+}
+
+div#sharevertical input {
+    margin-right: 2px;
+}
+
+div#sharevertical img {
+    vertical-align: top;
+}
+
+#sharevertical {
+    margin-top: 12px;
+}
+
+.row_white.counterprovider > td, .row_white.verticalcounterprovider > td {
+    float: left;
+    width: 225px;
+    margin-bottom: 0px !important;
+    padding: 4px 17px 2px 4px !important;
+}
+
+table#shareprovider tr td input, table#verticalshareprovider tr td input, table.form-table tr td input {
+    margin-right: 2px;
+}
+
+#sortable li, #verticalsortable li {
+    float: left !important;
+}
+
+div.current input, div.current textarea, div.current select {
+    float: none !important;
+}
+
+.help_ul {
+    margin: 0 0 15px 25px;
+    padding: 0px;
+    float: left;
+    list-style: circle;
+}
+
+.help_ul li a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #0088CC;;
+    line-height: 160%;
+}
+
+.help_ul li a:hover {
+    text-decoration: underline;
+}
+
+.stay_ul {
+    margin: 0 0 15px 10px;
+    padding: 0px;
+    float: left;
+    list-style: none;
+}
+
+.stay_ul li {
+    line-height: 160%;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+#Error {
+    background-image: url("../img/error.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    color: #FF0000;
+    height: 20px;
+    padding: 4px 2px 2px 30px;
+    background-color: #FEF5F1;
+    border: 1px solid #ED541D;
+}
+
+#wait {
+    background-image: url("../img/loading.gif");
+    background-repeat: no-repeat;
+    padding: 0px 2px 2px 30px;
+    color: #000;
+}
+
+#Success {
+    background-image: url("../img/ok.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    color: #669933;
+    height: 20px;
+    padding: 4px 2px 2px 30px;
+    background-color: #EAFFDC;
+    border: 1px solid #60CF4E;
+}
+
+.sociallogin_form {
+    padding: 0;
+    background-color: #fff;
+}
+
+.sociallogin_form a {
+    text-decoration: none !important;
+    color: #0088CC;;
+}
+
+.sociallogin_form .blank a {
+    text-decoration: none !important;
+    padding: 0 15px !important;
+    font-weight: bold;
+}
+
+.sociallogin_form a:hover {
+    text-decoration: none !important;;
+}
+
+.sociallogin_form legend {
+    margin-left: 10px;
+    line-height: 30px;
+}
+
+.sociallogin_form .row {
+    padding: 5px 10px;
+    font-size: 12px;
+    clear: both;
+    overflow: hidden;
+}
+
+.sociallogin_form .row_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #00ccff;
+}
+
+.sociallogin_form .row_button {
+    background-color: #F6F6F6;
+    border-top: 1px dotted #ddd;
+    margin-top: 14px;
+    padding: 5px 10px;
+}
+
+.sociallogin_form .row_description {
+    padding: 5px 0 10px 10px;
+    font-weight: bold;
+    color: #00ccff;
+}
+
+.sociallogin_form_main {
+    background-color: #EAF7FF;
+}
+
+.sociallogin_form_main .row {
+    margin-bottom: 7px;
+}
+
+.sociallogin_form_main .row_button {
+    padding-bottom: 0 !important;
+    background-color: #EAF7FF;
+}
+
+.icon-48-configuration {
+    background-image: url("../img/configuration.gif");
+}
+
+.sociallogin_table, .sociallogin_table1 {
+    background-color: #efefef;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    font-family: sans-serif;
+    font-size: 12px;
+    line-height: 1.4em;
+    width: 100%;
+}
+
+.sociallogin_table input {
+    border-color: #aaa;
+}
+
+.sociallogin_table .head {
+    font-weight: bold;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #ddd;
+}
+
+.sociallogin_table .subhead {
+    font-weight: bold;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.sociallogin_table th, .sociallogin_table label {
+    color: #222222;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.sociallogin_table th {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 200px;
+}
+
+.sociallogin_table th, .sociallogin_table label {
+    font-weight: normal;
+    text-shadow: 0 1px 0 #FFFFFF;
+    float: none;
+    margin-right: 10px;
+    width: 100%;
+}
+
+#profilefield_display label {
+    margin-right: 2px;
+}
+
+table#profilefield_display {
+    margin-top: 5px;
+}
+
+tr.row_white.verticalshareprovider, tr.row_white.verticalcounterprovider {
+    background: rgb(235, 235, 235);
+}
+
+.sociallogin_table td {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    padding: 8px 10px;
+}
+
+.sociallogin_table .description {
+    display: block;
+    float: left;
+    font-size: 10px;
+
+}
+
+.sociallogin_table td, textarea {
+    line-height: inherit;
+}
+
+.sociallogin_table td, textarea, input, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.sociallogin_table tr td.row {
+    line-height: 36px;
+}
+
+.sociallogin_table tr.description td {
+    color: #0D5995;
+}
+
+.sociallogin_table .row_white {
+    background-color: #fff;
+}
+
+.sociallogin_table th, .sociallogin_table label {
+    color: #222222;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.sociallogin_table th {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 200px;
+}
+
+.sociallogin_table th, .sociallogin_table label {
+    font-weight: normal;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.sociallogin_helpbox ul {
+    list-style-type: none;
+    padding-left: 20px;
+    font-size: 12px !important;
+    color: #000000 !important;
+}
+
+.sociallogin_helpbox {
+    border-color: #CCCCCC;
+}
+
+.sociallogin_helpbox a {
+    color: #000000 !important;
+    text-decoration: none;
+}
+
+.sociallogin_helpbox a:hover {
+    color: #00ccff !important;
+}
+
+.pane-sliders .title {
+    margin: 0;
+    padding: 2px;
+    color: #666;
+    cursor: pointer;
+}
+
+.pane-sliders .panel {
+    border: 1px solid #ccc;
+    margin-bottom: 3px;
+}
+
+.pane-sliders .panel h3 {
+    background: #f6f6f6;
+    color: #666;
+}
+
+.pane-sliders .content {
+    background: #f6f6f6;
+}
+
+.pane-sliders .adminlist {
+    border: 0 none;
+}
+
+.pane-sliders .adminlist td {
+    border: 0 none;
+}
+
+.jpane-toggler span {
+    background: transparent url(../images/j_arrow.png) 5px 50% no-repeat;
+    padding-left: 20px;
+}
+
+.jpane-toggler-down span {
+    background: transparent url(../images/j_arrow_down.png) 5px 50% no-repeat;
+    padding-left: 20px;
+}
+
+.jpane-toggler-down {
+    border-bottom: 1px solid #ccc;
+}
+
+/* tabs */
+dl.tabs {
+    float: left;
+    margin: 10px 0 -1px 0;
+    z-index: 50;
+}
+
+dl.tabs dt {
+    float: left;
+    padding: 4px 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    margin-left: 3px;
+    background: #f0f0f0;
+    color: #666;
+}
+
+dl.tabs dt.open {
+    background: #F9F9F9;
+    border-bottom: 1px solid #F9F9F9;
+    z-index: 100;
+    color: #000;
+}
+
+div.current {
+    clear: both;
+    border: 1px solid #ccc;
+    padding: 10px 10px;
+}
+
+div.current dd {
+    padding: 0;
+    margin: 0;
+}
