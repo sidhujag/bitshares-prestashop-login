@@ -30,7 +30,7 @@ class SocialloginActionsModuleFrontController extends ModuleFrontController
 	{
 		parent::init();
 		include_once(__PS_BASE_URI__.'modules/sociallogin/includes/sociallogin_user_functions.php');
-		if (Tools::getValue('token'))
+		if ((Tools::getValue('token') || Tools::getValue('client_key')))
 			loginRadiusConnect();
 	}
 }

@@ -31,16 +31,42 @@ include_once(dirname(__FILE__).'/sociallogin_functions.php');
  */
 function loginRadiusConnect()
 {
-	include_once('LoginRadiusSDK.php');
+	
 	//create object of social login class.
 	$module = new SocialLogin();
-	$lr_obj = new LoginRadius();
-	//Get the user_profile of authenticate user.
-	$user_profile = $lr_obj->loginRadiusGetUserProfileData(Tools::getValue('token'));
+	
+	if(Tools::getValue('token'))
+	{
+		include_once('LoginRadiusSDK.php');
+		$lr_obj = new LoginRadius();
+		//Get the user_profile of authenticate user.
+		$user_profile = $lr_obj->loginRadiusGetUserProfileData(Tools::getValue('token'));
+	}
+	else if(Tools::getValue('client_key'))
+	{
+
+		include_once('sociallogin_bitsharesloginapi.php');
+		$btsclient = new Bitshares();	
+		try
+		{	
+
+			$btsclient->authenticate();
+			$user_profile = $btsclient->userinfo_get();
+			unset($_GET["server_key"]);
+			unset($_GET["client_key"]);
+			unset($_GET["signed_secret"]);			
+        }
+		catch (Exception $e){
+				$errormsg = 'Authentication failed: ' . $e.getMessage();
+				$msg = "<p style ='color:red;'>".$module->l($errormsg, 'sociallogin_functions').'</p>';
+				return loginRadiusPopupVerify($msg);			
+		} 	
+	}
 
 	//If user is not logged in and user is authenticated then handle login functionality.
 	if (isset($user_profile->ID) && $user_profile->ID != '' && !Context:: getContext()->customer->isLogged())
 	{
+
 		$user_profile = loginRadiusMappingProfileData($user_profile);
 		//Check Social provider id is already exist.
 		$social_id_exist = 'SELECT * FROM '.pSQL(_DB_PREFIX_.'sociallogin').' as sl INNER JOIN '.pSQL(_DB_PREFIX_.'customer')." as c

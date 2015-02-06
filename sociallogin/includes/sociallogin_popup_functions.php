@@ -154,10 +154,14 @@ function loginRadiusPopUpWindow($msg = '', $status = 'status', $data)
 
 	if ($show_popup)
 		return 'noshowpopup';
-
+	$protocol_content = (Configuration::get('PS_SSL_ENABLED')) ? 'https://' : 'http://';
+	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+	$uriWithQuery = $uri_parts[0].'?'.http_build_query($_GET);	
+	$base_uri = $protocol_content.Tools::getHttpHost().$uriWithQuery;
 	$count_profile_data = count($profiledata) * 3.8;
 	$error_message = array('message' => $msg, 'status' => $status);
 	$smarty->assign('profile_data', $profiledata);
+	$smarty->assign('callbackURL', $base_uri);
 	$smarty->assign('count_profile_data', $count_profile_data);
 	$smarty->assign('error_message', $error_message);
 	return ($module->display(__PS_BASE_URI__.'modules/sociallogin', 'htmlpopup.tpl'));
@@ -174,7 +178,12 @@ function loginRadiusPopupVerify($msg, $social_id = '')
 	$module = new SocialLogin();
 	$context = Context::getContext();
 	$context->controller->addCSS(__PS_BASE_URI__.'modules/sociallogin/css/sociallogin_style.css');
+	$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+	$uriWithQuery = $uri_parts[0].'?'.http_build_query($_GET);
+	$protocol_content = (Configuration::get('PS_SSL_ENABLED')) ? 'https://' : 'http://';
+	$base_uri = $protocol_content.Tools::getHttpHost().$uriWithQuery;	
 	$context->smarty->assign('social_id', $social_id);
 	$context->smarty->assign('message', $msg);
+	$context->smarty->assign('callbackURL', $base_uri);
 	return ($module->display(__PS_BASE_URI__.'modules/sociallogin', 'htmlpopup-verify.tpl'));
 }

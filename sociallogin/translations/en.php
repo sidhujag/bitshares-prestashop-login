@@ -14,7 +14,7 @@ $_MODULE['<{sociallogin}prestashop>sociallogin_3f375b85c3e01abfa26c63f37c59ff02'
 $_MODULE['<{sociallogin}prestashop>sociallogin_cec2ab5f5e872165e2fadfe47ad6caf5'] = 'API Settings';
 $_MODULE['<{sociallogin}prestashop>sociallogin_bfb03dfd41e2b67e36910eca78a682bb'] = 'Social Share';
 $_MODULE['<{sociallogin}prestashop>sociallogin_4eefac348055d3a90a44aa0c845c4648'] = 'LoginRadius API Settings.';
-$_MODULE['<{sociallogin}prestashop>sociallogin_7cf45e83ceb5089b50aa7cd5f084551c'] = 'To activate the plugin, insert LoginRadius API Key & Secret ';
+$_MODULE['<{sociallogin}prestashop>sociallogin_7cf45e83ceb5089b50aa7cd5f084551c'] = 'To activate the LoginRadius portion of the module, insert LoginRadius API Key & Secret ';
 $_MODULE['<{sociallogin}prestashop>sociallogin_93f13975a0dfc80a59cadd19d6404967'] = '(How to get it?)';
 $_MODULE['<{sociallogin}prestashop>sociallogin_d876ff8da67c3731ae25d8335a4168b4'] = 'API Key';
 $_MODULE['<{sociallogin}prestashop>sociallogin_1ddec0f92f297e937bdf409977df0c02'] = 'API Secret';

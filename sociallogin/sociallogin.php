@@ -43,7 +43,7 @@ class SocialLogin extends Module
 		$this->module_key = '3afa66f922e9df102449d92b308b4532'; //Product Key //Don't change.
 		parent::__construct();
 		$this->displayName = $this->l('Social Login');
-		$this->description = $this->l('Let your users log in and comment via their accounts with popular ID providers such as Facebook,
+		$this->description = $this->l('Let your users log in and comment via their accounts with popular ID providers such as Bithares, Facebook,
 		Google, Twitter, Yahoo, Vkontakte and over 25 more!.');
 	}
 
@@ -64,9 +64,14 @@ class SocialLogin extends Module
 			return;
 		$loginradius_api_key = trim(Configuration::get('API_KEY'));
 		$loginradius_api_secret = trim(Configuration::get('API_SECRET'));
-
-		if (!empty($loginradius_api_key) && !empty($loginradius_api_secret))
+		
+		if ((!empty($loginradius_api_key) && !empty($loginradius_api_secret)) || Configuration::get('enable_bitshares_login') == '1')
 		{
+			if(Configuration::get('enable_bitshares_login') == '1')
+			{
+				$context->controller->addCSS(__PS_BASE_URI__.'modules/sociallogin/css/crypto.css');
+				$context->controller->addJS(__PS_BASE_URI__.'modules/sociallogin/js/sociallogin_bitsharesloginbutton.js');
+			}
 			$cookie->lr_login = false;
 			$margin_style = '';
 
@@ -75,18 +80,18 @@ class SocialLogin extends Module
 			$title = Configuration::get('TITLE');
 			$smarty->assign('sl_title', $title);
 			$iframe = 'interfacecontainerdiv';
-
+			$iframebts = 'btsinterfacecontainerdiv';
 			if ($str == 'right' || $str == '')
 				$right = true;
 			else
 			{
 				$right = false;
-				$iframe = 'interfacecontainerdiv';
 			}
 
 			$smarty->assign('right', $right);
 			$smarty->assign('margin_style', $margin_style);
 			$smarty->assign('iframe', $iframe);
+			$smarty->assign('iframebts', $iframebts);
 			return $this->display(__FILE__, 'loginradius.tpl');
 		}
 	}
@@ -121,19 +126,26 @@ class SocialLogin extends Module
 	 */
 	public function hookHeader($params)
 	{
+		$loginradius_apikey = trim(Configuration::get('API_KEY'));	
+		$loginradius_api_secret = trim(Configuration::get('API_SECRET'));
 		$script = '';
+		if(Configuration::get('enable_bitshares_login') == '1')
+		{
+			$context = Context::getContext();
+			$context->controller->addCSS(__PS_BASE_URI__.'modules/sociallogin/css/crypto.css');
+			$context->controller->addJS(__PS_BASE_URI__.'modules/sociallogin/js/sociallogin_bitsharesloginbutton.js');
+			$script .= loginRadiusBitsharesInterfaceScript();
+		}
+		if (!empty($loginradius_api_key) && !empty($loginradius_api_secret))
+		{
+			$script .= loginRadiusInterfaceScript();
+		}
+		
+		if (Configuration::get('enable_social_horizontal_sharing') == '0')
+			$script .= loginRadiusHorizontalShareScript();
 
-			$loginradius_api_key = trim(Configuration::get('API_KEY'));
-			$loginradius_api_secret = trim(Configuration::get('API_SECRET'));
-
-			if (!empty($loginradius_api_key) && !empty($loginradius_api_secret))
-				$script .= loginRadiusInterfaceScript();
-
-			if (Configuration::get('enable_social_horizontal_sharing') == '0')
-				$script .= loginRadiusHorizontalShareScript();
-
-			if (Configuration::get('enable_social_vertical_sharing') == '0')
-				$script .= loginRadiusVerticalShareScript();
+		if (Configuration::get('enable_social_vertical_sharing') == '0')
+			$script .= loginRadiusVerticalShareScript();
 
 		return $script;
 	}
@@ -224,14 +236,32 @@ class SocialLogin extends Module
 		//check user is already logged in.
 		if (Context::getContext()->customer->isLogged())
 		{
-			include_once('includes/LoginRadiusSDK.php');
-			$lr_obj = new LoginRadius();
-			$check_curl = function_exists('curl_version');
-			//Get the user profile data.
-			$userprofile = $lr_obj->loginRadiusGetUserProfileData(Tools::getValue('token'), $check_curl);
+			if(Tools::getValue('token'))
+			{
+				include_once('includes/LoginRadiusSDK.php');
+				$lr_obj = new LoginRadius();
+				$check_curl = function_exists('curl_version');
+				//Get the user profile data.
+				$userprofile = $lr_obj->loginRadiusGetUserProfileData(Tools::getValue('token'), $check_curl);
+			}
+			else if(Tools::getValue('client_key'))
+			{
+				include_once('includes/sociallogin_bitsharesloginapi.php');
+				$btsclient = new Bitshares();	
+				try
+				{	
+					$btsclient->authenticate();
+					$userprofile = $btsclient->userinfo_get();
+				}
+				catch (Exception $e){
 
+					$errormsg = 'Authentication failed: ' . $e.getMessage();
+					$msg = "<p style ='color:red;'>".$module->l($errormsg).'</p>';
+					return loginRadiusPopupVerify($msg);
+				} 	
+			}			
 			//Provide account linking when uer is laready logged in.
-			if (!empty($userprofile) && Tools::getValue('token'))
+			if (!empty($userprofile) && (Tools::getValue('token') || Tools::getValue('client_key')))
 				loginRadiusAccountLinking($cookie, $userprofile);
 
 			//Remove account linking when user click on remove button.
@@ -241,7 +271,7 @@ class SocialLogin extends Module
 
 		//user is not logged in.
 		//Retrieve token and provide login functionality.
-		if (Tools::getValue('token') && !Tools::getValue('email_create'))
+		if ((Tools::getValue('token') || Tools::getValue('client_key')) && !Tools::getValue('email_create'))
 			return loginRadiusConnect();
 		//Get verification link to verify email.
 		elseif (Tools::getValue('SL_VERIFY_EMAIL'))
@@ -380,8 +410,10 @@ class SocialLogin extends Module
 
 		if (Context::getContext()->customer->isLogged())
 		{
+			$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+			$uriWithQuery = $uri_parts[0].'?'.http_build_query($_GET);				
 			$http = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'Off' && !empty($_SERVER['HTTPS'])) ? 'https://' : 'http://');
-			$loc = urldecode($http.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+			$loc = urldecode($http.$_SERVER['HTTP_HOST'].$uriWithQuery);
 
 			if (strpos($loc, 'sociallogin') !== false)
 				$cookie->currentquerystring = $loc;

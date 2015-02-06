@@ -48,7 +48,7 @@ function loginRadiusGetAdminContent()
 	$context->controller->addJQueryUI('ui.sortable');
 	$html .= loginRadiusScriptToShowAdminTabs();
 
-	if ($api_key == '' && $api_secret == '')
+	if ($api_key == '' && $api_secret == '' && Configuration::get('enable_bitshares_login') == '0')
 		$html .= '<div title="warning" style="background-color: #FFFFE0;
 		border:1px solid #E6DB55; margin-bottom:5px; width: 900px;padding: 4px 2px 2px 30px;
 		background-image: url(../modules/sociallogin/img/warning.png);background-repeat: no-repeat;background-position:left;">
@@ -231,9 +231,19 @@ function loginRadiusSocialLoginTabSettings()
 	<tr>
 	<th class="head" colspan="2">'.$module->l('LoginRadius API Settings.', 'sociallogin').'</small></th>
 	</tr>
+	<tr class="row_white" id="enable_social_horizontal_sharing"><td colspan="2" >
+	<span class="subhead">'.$module->l('Do you want to enable Bitshares Login for your website?', 'sociallogin').'</span><br /><br />
+	<label><input type="radio" name="enable_bitshares_login" value="1"
+	'.(Tools::getValue('enable_bitshares_login', Configuration::get('enable_bitshares_login')) == 1 ? 'checked="checked"' : '').' />
+	'.$module->l('Yes', 'sociallogin').'</label>
+	<label><input type="radio" name="enable_bitshares_login" value="0"
+	'.(Tools::getValue('enable_bitshares_login', Configuration::get('enable_bitshares_login')) == 0 ? 'checked="checked"' : '').' />
+	'.$module->l('No', 'sociallogin').'</label>
+	</td>
+	</tr>
 	<tr class="row_white">
 	<input id="connection_url" type="hidden" value="'.__PS_BASE_URI__.'" />
-	<td colspan="2" ><span class="subhead"> '.$module->l('To activate the module, insert LoginRadius API Key & Secret', 'sociallogin').
+	<td colspan="2" ><span class="subhead"> '.$module->l('To activate the LoginRadius portion of the module, insert LoginRadius API Key & Secret', 'sociallogin').
 		' (<a href="http://ish.re/9VBI"
 		target="_blank" style="color: #0000ff;">'.$module->l('How to get it?', 'sociallogin').'</a>)</span>
 	<br/><br />
@@ -641,16 +651,15 @@ function loginRadiusSaveModuleSettings()
 	$settings = array_merge($merge_settings, loginRadiusAdvanceSettings());
 	$result = loginRadiusModuleSettingsValidate();
 
-	if ($result)
-		return $module->displayError($result);
-	else
-	{
-		Configuration::updateValue('API_KEY', trim(Tools::getValue('API_KEY')));
-		Configuration::updateValue('API_SECRET', trim(Tools::getValue('API_SECRET')));
-		loginRadiusUpdateModuleSettings($settings);
-		$html .= $module->displayConfirmation($module->l('Settings updated.', 'sociallogin'));
-		return $html;
-	}
+	if ($result != NULL)
+		$html .= $module->displayError($result);
+
+	Configuration::updateValue('API_KEY', trim(Tools::getValue('API_KEY')));
+	Configuration::updateValue('API_SECRET', trim(Tools::getValue('API_SECRET')));
+	loginRadiusUpdateModuleSettings($settings);
+	$html .= $module->displayConfirmation($module->l('Settings updated.', 'sociallogin'));
+	return $html;
+	
 }
 
 /**

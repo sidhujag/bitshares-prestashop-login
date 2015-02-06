@@ -93,9 +93,11 @@ function loginRadiusModuleSettingsValidate()
 	$loginradius_api_key = trim(Tools::getValue('API_KEY'));
 	$loginradius_api_secret = trim(Tools::getValue('API_SECRET'));
 	$empty_api_credentials = $module->l('LoginRadius API Key or Secret is invalid. Get your LoginRadius API key from ', 'sociallogin')."<a href='http://www.loginradius.com' target='_blank'>LoginRadius</a>";
-
+	if (empty($loginradius_api_key) && empty($loginradius_api_secret) && Configuration::get('enable_bitshares_login') == '1')
+		return NULL;
 	if (empty($loginradius_api_key) || empty($loginradius_api_secret))
 		return $empty_api_credentials;
+
 
 	$validateurl = 'https://'.LR_DOMAIN.'/api/v2/app/validate?apikey='.rawurlencode($loginradius_api_key).'&apisecret='.rawurlencode($loginradius_api_secret);
 	$data = array(
@@ -139,7 +141,7 @@ function loginRadiusModuleSettingsValidate()
  */
 function loginRadiusSocialLoginSettings()
 {
-	return array('LoginRadius_redirect' => trim(Tools::getValue('LoginRadius_redirect')), 'redirecturl' => trim(Tools::getValue('redirecturl')));
+	return array('enable_bitshares_login' => (int)Tools::getValue('enable_bitshares_login'), 'LoginRadius_redirect' => trim(Tools::getValue('LoginRadius_redirect')), 'redirecturl' => trim(Tools::getValue('redirecturl')));
 }
 
 /**

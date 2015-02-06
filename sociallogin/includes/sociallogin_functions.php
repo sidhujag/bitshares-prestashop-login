@@ -93,7 +93,22 @@ function loginRadiusGetDateOfBirth($dob)
 
 	return (!empty($dob) && Validate::isBirthDate($dob) ? $dob : '');
 }
-
+/**
+ * Bitshares Login Interface Script Code.
+ *
+ * @return string Get script to show Bitshares Login interface.
+ */
+function loginRadiusBitsharesInterfaceScript()
+{
+	$module = new SocialLogin();
+	
+	$base_uri = $protocol_content.Tools::getHttpHost().__PS_BASE_URI__.(!Configuration::get('PS_REWRITING_SETTINGS') ? 'index.php' : '');
+	$bitshareslogin_handler = __PS_BASE_URI__ . "modules/sociallogin/ajax.php";
+	
+	$lrhtml = '<script type="text/javascript"> 
+	$(window).load(function() { $(".btsinterfacecontainerdiv").html("<div class=\"cell text-center\"><a href=\"javascript:void(0)\" onclick=\"javascript:getBitsharesLoginURL(\''.$base_uri.'\', \''.$bitshareslogin_handler.'\')\" class=\"btn btn-block btn-lg btn-social btn-bitshares\"><img alt=\"BTS\" height=\"42\" src=\"'.__PS_BASE_URI__.'modules/sociallogin/img/logo-bitshares.svg\" width=\"42\">&nbsp;'.$module->l('BitShares Login', 'sociallogin_functions').'</a></div>")});</script>';
+	return $lrhtml;
+}
 /**
  * Social Login Interface Script Code.
  *
@@ -153,7 +168,7 @@ function loginRadiusRedirectUrl()
 		if (Tools::getValue('back'))
 		{
 			if (_PS_VERSION_ >= 1.6)
-			{
+			{		
 				$loc = $_SERVER['REQUEST_URI'];
 				$redirect_location = explode('back=', $loc);
 				$redirect = $redirect_location['1'];
@@ -164,7 +179,9 @@ function loginRadiusRedirectUrl()
 		elseif (empty($redirect))
 		{
 			$http = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'Off' && !empty($_SERVER['HTTPS'])) ? 'https://' : 'http://');
-			$redirect = urldecode($http.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+			$uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+			$uriWithQuery = $uri_parts[0].'?'.http_build_query($_GET);				
+			$redirect = urldecode($http.$_SERVER['HTTP_HOST'].$uriWithQuery);
 		}
 	}
 

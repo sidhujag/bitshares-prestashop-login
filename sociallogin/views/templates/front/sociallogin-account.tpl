@@ -35,6 +35,7 @@
 
     <div>
         <div class="favoriteproduct clearfix">
+			<div class="btsinterfacecontainerdiv"></div>
             <div class="interfacecontainerdiv"></div>
             {if $sociallogin}
                 <ul style="list-style:none">

@@ -60,7 +60,7 @@
             </b></div>
         <div id="popupinner">
 
-            <form method="post" name="validfrm" id="validfrm" action="" onsubmit="return popupvalidation();">
+            <form method="post" name="validfrm" id="validfrm" action="{$callbackURL|escape:'htmlall':'UTF-8'}" onsubmit="return popupvalidation();">
                 {foreach $profile_data as $profiledata }
                     <div>
 
@@ -108,7 +108,7 @@
             <input type="submit" id="LoginRadius" name="LoginRadius"
                    value="{l s='Submit' mod='sociallogin'}" class="inputbutton">
             <input type="button" value="{l s='Cancel' mod='sociallogin'}"
-                   class="inputbutton" onclick="window.location.href=window.location;"/>
+                   class="inputbutton" onclick="window.location.replace('{$callbackURL|escape:'htmlall':'UTF-8'}');"/>
         </div>
     </div>
     </form>

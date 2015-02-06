@@ -39,6 +39,7 @@
                             {$sl_title|escape:'htmlall':'UTF-8'}
                         {/if}
                         <br/>
+                        <div class="{$iframebts|escape:'htmlall':'UTF-8'}"></div>
                         <div class="{$iframe|escape:'htmlall':'UTF-8'}"></div>
                     {/if}
                 </li>
@@ -60,6 +61,7 @@
                             });</script>
                     {/literal}
                     <div style="padding-top:5px;">
+						<div class="{$iframebts|escape:'htmlall':'UTF-8'}"></div>
                         <div class="{$iframe|escape:'htmlall':'UTF-8'}"></div>
                     </div>
                 {/if}

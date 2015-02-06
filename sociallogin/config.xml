@@ -3,7 +3,7 @@
 	<name>sociallogin</name>
 	<displayName><![CDATA[Social Login]]></displayName>
 	<version><![CDATA[3.0]]></version>
-	<description><![CDATA[Let your users log in and comment via their accounts with popular ID providers such as Facebook,
+	<description><![CDATA[Let your users log in and comment via their accounts with popular ID providers such as Bitshares, Facebook,
 		Google, Twitter, Yahoo, Vkontakte and over 25 more!.]]></description>
 	<author><![CDATA[LoginRadius]]></author>
 	<tab><![CDATA[others]]></tab>
