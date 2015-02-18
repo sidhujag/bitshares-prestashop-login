@@ -135,8 +135,9 @@ class SocialLogin extends Module
 			$context->controller->addCSS(__PS_BASE_URI__.'modules/sociallogin/css/crypto.css');
 			$context->controller->addJS(__PS_BASE_URI__.'modules/sociallogin/js/sociallogin_bitsharesloginbutton.js');
 			$script .= loginRadiusBitsharesInterfaceScript();
+			$script .= loginRadiusInterfaceScript();
 		}
-		if (!empty($loginradius_api_key) && !empty($loginradius_api_secret))
+		else if (!empty($loginradius_api_key) && !empty($loginradius_api_secret))
 		{
 			$script .= loginRadiusInterfaceScript();
 		}
