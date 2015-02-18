@@ -30,7 +30,7 @@
         </div>
 
         <div class="footerbox">
-            <form method="post" name="validform_verify" action="">
+            <form method="post" name="validform_verify" action="{$callbackURL|escape:'htmlall':'UTF-8'}">
                 <input type="button" value="{l s="Ok" mod='sociallogin'}"
                        onclick="window.location.replace('{$callbackURL|escape:'htmlall':'UTF-8'}');" class="inputbutton"/>
                 {if !empty($social_id)}

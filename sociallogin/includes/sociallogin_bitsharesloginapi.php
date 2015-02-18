@@ -66,7 +66,8 @@ class Bitshares {
     private $authenticateUnRegisteredBlockchain = true; // let em through the gate?
 
     function __construct() { 
-		require_once '/../../../bitshares/config.php';
+		require_once(dirname(__FILE__).'/../../../bitshares/config.php');
+
 
 
         // wallet settings
