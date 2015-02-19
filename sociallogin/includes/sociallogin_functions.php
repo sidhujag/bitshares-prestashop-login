@@ -101,7 +101,7 @@ function loginRadiusGetDateOfBirth($dob)
 function loginRadiusBitsharesInterfaceScript()
 {
 	$module = new SocialLogin();
-	
+	$protocol_content = (Configuration::get('PS_SSL_ENABLED')) ? 'https://' : 'http://';
 	$base_uri = $protocol_content.Tools::getHttpHost().__PS_BASE_URI__.(!Configuration::get('PS_REWRITING_SETTINGS') ? 'index.php' : '');
 	$bitshareslogin_handler = __PS_BASE_URI__ . "modules/sociallogin/ajax.php";
 	

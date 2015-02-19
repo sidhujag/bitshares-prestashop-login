@@ -55,7 +55,8 @@ function loginRadiusAddSharingDiv($show_horizontal, $show_vertical)
 	$module = new SocialLogin();
 	$context = Context::getContext();
 	$smarty = $context->smarty;
-
+	$smarty->assign('horizontal_sharing', '');
+	$smarty->assign('vertical_sharing', '');
 	if (Configuration::get('enable_social_horizontal_sharing') == '0' && $show_horizontal)
 	{
 
