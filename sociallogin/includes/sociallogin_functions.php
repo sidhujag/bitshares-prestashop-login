@@ -103,10 +103,11 @@ function loginRadiusBitsharesInterfaceScript()
 	$module = new SocialLogin();
 	$protocol_content = (Configuration::get('PS_SSL_ENABLED')) ? 'https://' : 'http://';
 	$base_uri = $protocol_content.Tools::getHttpHost().__PS_BASE_URI__.(!Configuration::get('PS_REWRITING_SETTINGS') ? 'index.php' : '');
+	$base_uri .= '?back='.loginRadiusRedirectUrl();
 	$bitshareslogin_handler = __PS_BASE_URI__ . "modules/sociallogin/ajax.php";
 	
 	$lrhtml = '<script type="text/javascript"> 
-	$(window).load(function() { $(".btsinterfacecontainerdiv").html("<div class=\"cell text-center\"><a href=\"javascript:void(0)\" onclick=\"javascript:getBitsharesLoginURL(\''.$base_uri.'\', \''.$bitshareslogin_handler.'\')\" class=\"btn btn-block btn-lg btn-social btn-bitshares\"><img alt=\"BTS\" height=\"42\" src=\"'.__PS_BASE_URI__.'modules/sociallogin/img/logo-bitshares.svg\" width=\"42\">&nbsp;'.$module->l('BitShares Login', 'sociallogin_functions').'</a></div>")});</script>';
+	$(window).load(function() { $(".btsinterfacecontainerdiv").html("<div><a href=\"javascript:void(0)\" onclick=\"javascript:getBitsharesLoginURL(\''.$base_uri.'\', \''.$bitshareslogin_handler.'\')\" class=\"btn btn-block btn-social btn-bitshares\"><img alt=\"BTS\" height=\"30\" src=\"'.__PS_BASE_URI__.'modules/sociallogin/img/logo-bitshares.svg\" width=\"30\">&nbsp;'.$module->l('BitShares', 'sociallogin_functions').'</a></div>")});</script>';
 	return $lrhtml;
 }
 /**
@@ -127,7 +128,7 @@ function loginRadiusInterfaceScript()
 	return '<script src="//hub.loginradius.com/include/js/LoginRadius.js"></script>
     <script src="'.__PS_BASE_URI__.'modules/sociallogin/js/LoginRadiusSDK.2.0.0.js"></script>
 <script type="text/javascript">
-	function loginradius_interface() { $ui = LoginRadius_SocialLogin.lr_login_settings;$ui.interfacesize = "'.$interface_icon_size.'";
+	function loginradius_interface() { LoginRadius_SocialLogin.iconwidth = "200px"; LoginRadius_SocialLogin.iconheight = "200px"; $ui = LoginRadius_SocialLogin.lr_login_settings;$ui.interfacesize = "'.$interface_icon_size.'";
 	$ui.lrinterfacebackground="'.$interface_background_color.'";$ui.noofcolumns='.$interface_column.';$ui.apikey = "'.$loginradius_apikey.'";
 	$ui.callback="'.$base_uri.'";$ui.is_access_token=true; $ui.lrinterfacecontainer ="interfacecontainerdiv"; LoginRadius_SocialLogin.init(options); }var options={};
 	options.login=true; LoginRadius_SocialLogin.util.ready(loginradius_interface); 
@@ -167,14 +168,17 @@ function loginRadiusRedirectUrl()
 	{
 		if (Tools::getValue('back'))
 		{
+			$back = Tools::getValue('back');
 			if (_PS_VERSION_ >= 1.6)
 			{		
-				$loc = $_SERVER['REQUEST_URI'];
-				$redirect_location = explode('back=', $loc);
-				$redirect = $redirect_location['1'];
+				$redirect_location = explode('controller=', $back);
+				if(isset($redirect_location['1']))
+				{
+					$back = $redirect_location['1'];
+				}
 			}
-			else
-				$redirect = Tools::getValue('back');
+			
+			$redirect = $back;
 		}
 		elseif (empty($redirect))
 		{

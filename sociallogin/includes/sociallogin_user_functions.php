@@ -80,7 +80,7 @@ function loginRadiusConnect()
 			$email_exist = (!empty($db_obj[0]['email']) ? $db_obj[0]['email'] : '');
 			$active_user = (!empty($db_obj[0]['active']) ? $db_obj[0]['active'] : '');
 			//if user is blocked
-			if ($active_user == 0)
+			if ($active_user === 0)
 			{
 			$msg = $module->l('User has been disabled or blocked.', 'sociallogin_functions');
 			return loginRadiusPopupVerify($msg);
@@ -101,7 +101,7 @@ function loginRadiusConnect()
 				$active_user = (!empty($user_email_exist['0']['active']) ? $user_email_exist['0']['active'] : '');
 
 				//if user is blocked
-				if ($active_user == 0)
+				if ($active_user === 0)
 				{
 					$msg = $module->l('User has been disabled or blocked.', 'sociallogin_functions');
 					return loginRadiusPopupVerify($msg);
